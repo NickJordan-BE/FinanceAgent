@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 
 import "./index.css"
 
@@ -7,10 +7,35 @@ import "./index.css"
 const HomePage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const axiosPrivate = useAxiosPrivate();
 
+  // Re-render every message
+  useEffect(() => {
+  },[messages])
 
-  const handleMessage = () => {
-    
+  // API call for chatbot
+  const handleMessage = async (e) => {
+    e.preventDefault();
+    setInput("")
+
+    if (input.trim() === "") {
+      setMessages((prevMessages) => [...prevMessages, "Please Ask A Valid Question."]);
+      return 
+    }
+
+    const userMessage = input.trim();
+    setMessages((prevMessages) => [...prevMessages, { sender: "user", content: userMessage}]);
+
+    try {
+      const AIResponse = await axiosPrivate.post("/api/chat", {
+        query: userMessage
+      });
+
+      setMessages((prevMessages) => [...prevMessages, { sender: "ai", content: AIResponse.data.data }]);
+      
+    } catch (err) {
+      console.log("Error getting AI response: ", err)
+    }
   }
 
 
@@ -24,7 +49,7 @@ const HomePage = () => {
             <ul className="message-list" >
             {messages.map((msg, index) => {
               return (
-                <li key={index} className='message'>{msg}</li>
+                <li key={index} className={`${msg.sender}-message`}>{msg.content}</li>
               )
             })}
             </ul>

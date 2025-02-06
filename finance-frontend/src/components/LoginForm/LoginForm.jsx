@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { browserLocalPersistence, browserSessionPersistence, setPersistence, signInWithEmailAndPassword } from 'firebase/auth';
+import { browserLocalPersistence, browserSessionPersistence, setPersistence, signInWithEmailAndPassword, getIdToken } from 'firebase/auth';
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from '../../context/firebase';
 
@@ -28,6 +28,7 @@ const LoginForm = () => {
             }
 
             const user = await signInWithEmailAndPassword(auth, email, pass);
+
 
             if (!user) {
                 setMessage("Login Failed");

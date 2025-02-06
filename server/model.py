@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from langchain.tools import Tool
 from langchain_community.tools import TavilySearchResults, DuckDuckGoSearchResults
 from langchain_openai import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
@@ -19,9 +18,10 @@ tools = [ddg_search, ta_search]
 
 the_agent = initialize_agent(
     tools=tools,
-    agent_type= AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    agent_type= AgentType.CHAT_CONVERSATIONAL_REACT_DESCRIPTION,
     llm=llm,
     verbose=True,
+    handle_parsing_errors=True
 )
 
 
