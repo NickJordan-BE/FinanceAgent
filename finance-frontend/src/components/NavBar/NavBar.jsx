@@ -59,7 +59,7 @@ const NavBar = () => {
                     <Link to="/"><button class="button"><p className="p">Home</p></button></Link>
                 </li>
                 <li className="li">
-                    <Link to="/spend-tracker"><button className="button"><p className="p">Spending Tracker</p></button></Link>
+                    <Link to="/spending/log"><button className="button"><p className="p">Spending Tracker</p></button></Link>
                 </li>
                 <li class="li">
                     <Link to="/budgets"><button className="button"><p className="p">Budgets</p></button></Link>

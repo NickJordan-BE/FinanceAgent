@@ -1,0 +1,58 @@
+.update-container {
+    background-color: #282828;
+    color: #bd9cfb;
+    width: 80%;
+    margin: 0 10%;
+    padding: 15px;
+    margin-top: 5%;
+    height: 600px;
+    text-align: center;
+    border: 1px solid #8b8b8b;
+
+    button {
+        padding: 7px;
+        margin-top: 25px;
+        margin-left: 15px;
+        background-color: #8054f5;
+        color:white;
+        border-radius: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        width: 125px;
+    }
+}
+
+.checkbox-container {
+    width: 100%;
+}
+
+.update-check-label {
+    font-size: 18px;
+}
+
+.update-header {
+    font-size: 48px;
+}
+
+.update-text-label {
+    padding: 15px;
+    font-size: 28px;
+}
+
+.update-text-input {
+    border-radius: 10px;
+    border: none;
+    width: 90%;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    background-color: #8b8b8b;
+    padding: 10px;
+    color: white;
+}
+
+.update-text-input:focus {
+    outline: #bd9cfb;
+    border: 1px solid #bd9cfb;
+    color: white;
+}

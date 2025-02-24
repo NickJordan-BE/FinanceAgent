@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
-from langchain_community.tools import TavilySearchResults, DuckDuckGoSearchResults
+from langchain_community.tools import TavilySearchResults, DuckDuckGoSearchResults, AskNewsSearch
 from langchain_openai import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
+from langchain_fmp_data import FMPDataToolkit
 
-
+# load env files
 load_dotenv()
 
 llm = ChatOpenAI(
@@ -11,17 +12,24 @@ llm = ChatOpenAI(
     temperature=0
 )
 
-ddg_search = DuckDuckGoSearchResults()
+ddg_search = DuckDuckGoSearchResults(handle_tool_error=True)
 ta_search = TavilySearchResults(max_results=2)
+ask_news_search = AskNewsSearch(k=1)
+# fmp_toolkit = FMPDataToolkit(
+#     query="Financial Analysis and Financial Knowledge",
+#     num_results=2
+# )
+# fmp_tool = fmp_toolkit.get_tools()
+
 
 tools = [ddg_search, ta_search]
 
 the_agent = initialize_agent(
     tools=tools,
-    agent_type= AgentType.CHAT_CONVERSATIONAL_REACT_DESCRIPTION,
+    agent_type= AgentType.OPENAI_MULTI_FUNCTIONS,
     llm=llm,
     verbose=True,
-    handle_parsing_errors=True
+    handle_parsing_errors=True,
 )
 
 

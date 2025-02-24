@@ -29,7 +29,6 @@ const LoginForm = () => {
 
             const user = await signInWithEmailAndPassword(auth, email, pass);
 
-
             if (!user) {
                 setMessage("Login Failed");
             }
@@ -63,9 +62,9 @@ const LoginForm = () => {
                 </div>
                 
                 <div className="flex-row">
-                <div>
+                <div className='checkbox-container'>
                 <input type="checkbox" checked={checked} onChange={checkChange}/>
-                <label>Remember me </label>
+                <label className='check-label'>Remember me </label>
                 </div>
                 <span className="span">Forgot password?</span>
                 </div>

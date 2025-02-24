@@ -11,3 +11,4 @@ flask-cors
 firestore
 firebase-admin
 requests
+langchain-fmp-data

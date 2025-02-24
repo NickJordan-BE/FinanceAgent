@@ -9,7 +9,7 @@ from langchain_core.prompts import ChatPromptTemplate
 load_dotenv()
 client = storage.Client()
 
-
+# Chatbot call for conversations
 def chatbot_call(uid, input):
 
     project_id = os.getenv("PROJECT_ID")
@@ -31,11 +31,11 @@ def chatbot_call(uid, input):
     prompt_temp = ChatPromptTemplate.from_messages(
         [
             ("system", """You are an expert financial advisor. Answer the question to 
-            the best of your abilities and explain clearly: {question}. 
+            the best of your abilities: {question}. 
             If you are asked about previous conversations 
             or are asked questions related to previous conversations,
             your action will be to search this chat history: {chat_history}
-            Output your answer if there is no further action needed.""")
+            Then answer the user's question to the best of your ability.""")
         ]
     )
 

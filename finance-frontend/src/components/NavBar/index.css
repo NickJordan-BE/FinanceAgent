@@ -1,22 +1,25 @@
 /* From Uiverse.io by asgardOP */ 
+body {
+  background-color: #121212;
+}
+
 .navBar {
     height: 50px;
 }
 
 .burger {
   display: none;
-  color: black;
+  color: white;
 }
 
 .burger i {
-  color: black;
+  color: white;
 }
 
 .ul {
     width: 100%;
     height: 50px;
-    background-color: #ccc;
-    border: 1px solid black;
+    background-color: #121212;
     overflow: hidden;
     list-style: none;
   }
@@ -45,10 +48,11 @@
     position: relative;
     font-size: 18px;
     top: -3px;
+    color: #bd9cfb;
   }
   
   .button:hover {
-    color: rgb(172, 40, 0);
+    color: #441ef0;
     text-align: center;
   }
   .button:hover::before {
@@ -57,7 +61,7 @@
     height: 40px;
     top: 2px;
     border-radius: 3px;
-    background-color: rgb(255, 83, 53);
+    background-color: rgb(68, 30, 240);
   }
   .button::before {
     content: "";
@@ -65,7 +69,7 @@
     position: absolute;
     width: 6px;
     height: 6px;
-    background-color: tomato;
+    background-color: rgb(68, 30, 240);
     left: -10px;
     top: 19px;
     cursor: pointer;
@@ -75,7 +79,7 @@
   }
   
   .button:active::before {
-    background-color: rgb(255, 38, 0);
+    background-color: rgb(68, 30, 240);
   }
   
 

@@ -6,6 +6,9 @@ import Login from "./route/Login"
 import ProtectedRoute from "./route/ProtectedRoute"
 import MissingPage from "./route/Missing"
 import Layout from "./components/Layout/Layout"
+import Spending from "./route/Spending"
+import CreateTransaction from "./route/CreateTransaction"
+import UpdateTransaction from "./route/UpdateTransaction"
 
 function App() {
 
@@ -16,7 +19,10 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Home />}/>
+              <Route path="/" element={<Home />} />
+              <Route path="/spending/log" element={<Spending />} />
+              <Route path="/spending/log/create" element={<CreateTransaction />} />
+              <Route path="/spending/log/update/:id" element={<UpdateTransaction />} />
             </Route>
             
             <Route path="/register" element={<Register />}/>
