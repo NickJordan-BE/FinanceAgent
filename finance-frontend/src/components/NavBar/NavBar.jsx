@@ -64,6 +64,9 @@ const NavBar = () => {
                 <li class="li">
                     <Link to="/budgets"><button className="button"><p className="p">Budgets</p></button></Link>
                 </li>
+                <li class="li">
+                    <Link to="/analysis"><button className="button"><p className="p">Financial Analysis</p></button></Link>
+                </li>
                 { curUser 
                 ? <li className="li">
                     <button className="button" onClick={handleLogout}><p className="p">Logout</p></button>

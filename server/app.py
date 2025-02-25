@@ -2,15 +2,14 @@ from flask import Flask, request, jsonify
 from functools import wraps
 from datetime import datetime
 from flask_cors import CORS
-from dotenv import load_dotenv
 from routes import chatbot_call
 from firebase import verify_firebase_token
 from models.users import create_user, delete_user, update_user_email
-from chains import analyze_spending
-from models.transactions import get_transactions_by_date, get_transactions_by_two_dates, get_all_transactions_by_user, create_transaction, delete_transaction, update_transaction_amount, update_transaction_company, update_transaction_amount_and_company
-from models.logs import create_log
+from models.transactions import get_transactions_user_month, get_transactions_by_date, get_transactions_by_two_dates, get_all_transactions_by_user, create_transaction, delete_transaction, update_transaction_amount, update_transaction_company, update_transaction_amount_and_company
+from models.logs import create_log, get_log
+import locale
 
-load_dotenv()
+locale.setlocale(locale.LC_ALL, '')
 
 app = Flask(__name__)
 
@@ -37,12 +36,25 @@ def auth_middleware(f):
         return response
     return middleware
 
-@app.route("/api/analysis/<string:uid>", methods=['POST'])
+@app.route("/api/users/<string:uid>/analysis/create", methods=['POST'])
 def create_log_route(uid):
     try:
 
         log_ref, data = create_log(uid, datetime.today().replace(day=1))
         return jsonify({"data": data}), 200
+    
+    except Exception as e:
+        return jsonify({"err": str(e)}), 500
+    
+@app.route("/api/users/<string:uid>/analysis/<string:month>")
+@auth_middleware
+def get_log_route(uid, month):
+    try:
+
+        doc_ref = get_log(uid, month)
+        doc = doc_ref.get()
+    
+        return jsonify({"data": doc.to_dict()}), 200
     
     except Exception as e:
         return jsonify({"err": str(e)}), 500
@@ -52,7 +64,8 @@ def create_log_route(uid):
 def create_transaction_route():
     try:
         req = request.get_json()
-        amount, company, uid = req["amount"] + "$", req["company"], req["uid"]
+        amount, company, uid = req['amount'], req["company"], req["uid"]
+        amount = locale.currency(float(amount), grouping=True)
         
         if not amount or not company or not uid:
             return jsonify({"Error": "All Fields Must Be Filled"}), 500
@@ -114,12 +127,12 @@ def get_transaction_date_route():
         print(e)
         return jsonify({"Error": f"An error occurred: {str(e)}"}), 500
     
-@app.route("/api/transactions/users/<string:uid>", methods=['GET'])
-@auth_middleware
-def get_transaction_user_route(uid):
+@app.route("/api/transactions/users/<string:uid>/month/<string:date>", methods=['GET'])
+
+def get_transaction_user_route(uid, date):
     try:
-        
-        result = get_all_transactions_by_user(uid)
+        date = datetime.fromisoformat(date.replace("Z", "+00:00"))
+        result = get_transactions_user_month(uid, date.replace(day=1))
 
         return jsonify({"data": result}), 200
     
@@ -133,6 +146,7 @@ def update_transaction_amount_route(id):
     try:
         req = request.get_json()
         new_amount = req["new_amount"]
+        new_amount = locale.currency(int(new_amount), grouping=True)
 
         result = update_transaction_amount(transaction_id=id, new_amount=new_amount)
 
@@ -225,6 +239,7 @@ def chat_route():
     try:
         req = request.get_json()
         query = req["query"]
+        uid = req["uid"]
     
         if not query:
             return jsonify({"error": "No query provided"}), 400

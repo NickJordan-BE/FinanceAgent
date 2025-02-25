@@ -1,7 +1,7 @@
 import sys
 import os
 from firebase_admin import firestore
-from datetime import datetime
+from datetime import timedelta
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -16,7 +16,7 @@ def create_transaction(amount, company, uid):
 
     category = categorize_spending(amount, company)
 
-    data = {"amount": amount + "$", 
+    data = {"amount": amount, 
             "company": company, 
             "uid": uid,
             "category": category,
@@ -75,8 +75,9 @@ def get_transactions_by_date(start_date):
 
 # Retrieves all transactions by user for the current month
 def get_transactions_user_month(uid, cur_month):
-
-    query = collection.where(field_path="uid", op_string="==", value=uid).where(field_path="createdAt", op_string=">=", value=cur_month)
+    next_month = cur_month.replace(day=28) + timedelta(days=4)
+    next_month - timedelta(days=next_month.day)
+    query = collection.where(field_path="uid", op_string="==", value=uid).where(field_path="createdAt", op_string=">=", value=cur_month).where(field_path="createdAt", op_string="<=", value=next_month).order_by("createdAt", direction="DESCENDING")
     doc_snapshot = query.get()
     docs = []
 

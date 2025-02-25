@@ -10,6 +10,17 @@
     }
 }
 
+.reset-button {
+    padding: 10px;
+    margin-left: 10px;
+    background-color: #8054f5;
+    border-radius: 15px;
+    font-size: 15px;
+    cursor: pointer;
+    color:white;
+    width: 75px;
+}
+
 .log-header {
     text-align: center;
     padding: 5px;
@@ -94,17 +105,23 @@
 
 .logs-container {
     list-style: none;
-    margin-right: 7.5%; 
+    width: 100%;
 }
+
+
 
 .log {
     border: 1px solid #575757;
-    padding: 15px;
+    padding: 5px 5px;
     background-color: #3f3f3f;
+    text-align: center;
+
+    .item-header {
+        padding: 5px;
+    }
     
-    span {
-        margin: 5px;
-        font-size: 18px;
+    .item {
+        padding: 10px;
     }
 
     button {

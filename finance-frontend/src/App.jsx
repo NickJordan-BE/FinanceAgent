@@ -9,6 +9,7 @@ import Layout from "./components/Layout/Layout"
 import Spending from "./route/Spending"
 import CreateTransaction from "./route/CreateTransaction"
 import UpdateTransaction from "./route/UpdateTransaction"
+import AnalysisPage from "./route/AnalysisPage"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
               <Route path="/spending/log" element={<Spending />} />
               <Route path="/spending/log/create" element={<CreateTransaction />} />
               <Route path="/spending/log/update/:id" element={<UpdateTransaction />} />
+              <Route path="/analysis" element={<AnalysisPage />} />
             </Route>
             
             <Route path="/register" element={<Register />}/>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
+import Loading from '../Loading/Loading'
 
 import "./index.css"
 
 const UpdateTransactionLog = () => {
+  const [isLoading, setLoading] = useState(false);
   const [amountCheck, setAmountChecked] = useState(false);
   const [compCheck, setCompChecked] = useState(false);
   const [newAmount, setNewAmount] = useState("");
@@ -26,7 +28,7 @@ const UpdateTransactionLog = () => {
     e.preventDefault();
 
 		try {
-
+      setLoading(true)
       if (compCheck && amountCheck) {
 		    const fullUpdateRes = await axiosPrivate.patch(`/api/transactions/${id}/update`,{
           new_amount: newAmount,
@@ -42,6 +44,7 @@ const UpdateTransactionLog = () => {
         });
       }
 
+      setLoading(false)
       setAmountChecked(false);
       setCompChecked(false);
       setNewAmount("");
@@ -50,7 +53,7 @@ const UpdateTransactionLog = () => {
 
       return;
 		} catch (err) {
-
+      setLoading(false)
 			console.log(err);
 			return err;
 		}
@@ -58,6 +61,7 @@ const UpdateTransactionLog = () => {
 
 
   return (
+    isLoading ? <Loading /> : 
     <div className='update-container'>
         <h1 className='update-header'>Update Transaction</h1>
     <form onSubmit={handleSubmit}>

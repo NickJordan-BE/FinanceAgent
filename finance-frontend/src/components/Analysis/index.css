@@ -1,0 +1,49 @@
+.analysis-container {
+    width: 75%;
+    text-align: center;
+    margin: 8% 12.5%;
+    color: white;
+    padding: 18px;
+    background-color: #3f3f3f;
+    border: 1px solid #717171;
+    border-radius: 10px;
+}
+
+.good-habits {
+    font-size: 24px;
+}
+
+.feedback {
+    font-size: 24px;
+    margin: 18px;
+}
+
+.analysis-header {
+    color: #bd9cfb;
+    font-size: 48px;
+}
+
+.rating-header {
+    color: #bd9cfb;
+    font-size: 48px;
+}
+
+.rating-container {
+    h2 {
+        font-size: 34px;
+    }
+    p {
+        font-size: 24px;
+    }
+}
+
+.budget-button {
+    padding: 7px;
+    margin-top: 25px;
+    background-color: #8054f5;
+    color:white;
+    border-radius: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    width: 125px;
+}

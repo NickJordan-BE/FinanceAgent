@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import useAuth from '../../hooks/useAuth'
 
 import "./index.css"
 
@@ -8,6 +9,7 @@ const HomePage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const axiosPrivate = useAxiosPrivate();
+  const { curUser } = useAuth();
 
   // Re-render every message
   useEffect(() => {
@@ -28,7 +30,8 @@ const HomePage = () => {
 
     try {
       const AIResponse = await axiosPrivate.post("/api/chat", {
-        query: userMessage
+        query: userMessage,
+        uid: curUser.uid
       });
 
       setMessages((prevMessages) => [...prevMessages, { sender: "ai", content: AIResponse.data.data }]);

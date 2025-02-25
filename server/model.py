@@ -30,6 +30,7 @@ the_agent = initialize_agent(
     llm=llm,
     verbose=True,
     handle_parsing_errors=True,
+    max_iterations=15
 )
 
 
