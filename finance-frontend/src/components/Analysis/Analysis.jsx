@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import useAuth from '../../hooks/useAuth';
 import Loading from "../Loading/Loading"
@@ -20,7 +20,7 @@ const Analysis = () => {
 
 
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const getAnalysis = async () => {
             try {
                 setLoading(true);

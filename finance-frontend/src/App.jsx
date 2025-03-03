@@ -10,6 +10,7 @@ import Spending from "./route/Spending"
 import CreateTransaction from "./route/CreateTransaction"
 import UpdateTransaction from "./route/UpdateTransaction"
 import AnalysisPage from "./route/AnalysisPage"
+import BudgetPage from "./route/BudgetPage"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="/spending/log/create" element={<CreateTransaction />} />
               <Route path="/spending/log/update/:id" element={<UpdateTransaction />} />
               <Route path="/analysis" element={<AnalysisPage />} />
+              <Route path="/budgets" element={<BudgetPage />} />
             </Route>
             
             <Route path="/register" element={<Register />}/>

@@ -30,10 +30,8 @@ const SpendingLog = () => {
             try {
                 setLoading(true);
                 const result = await axiosPrivate.get(`/api/transactions/users/${curUser.uid}/month/${curDate}`);
-
-                if (result.status == 200 && result.data.data.length != 0) {
-                    setLogs(result.data.data);
-                } else {
+                setLogs(result.data.data);
+                if (result.status == 200 && result.data.data.length == 0) {
                     window.alert("No Logs Created Yet. Add one!")
                 }
                 setLoading(false);
@@ -157,8 +155,10 @@ const SpendingLog = () => {
                                 <td className='item'>
                                     {log[1].createdAt.slice(0, log[1].createdAt.length - 13)}
                                 </td>
+                                <td>
                                 <button className='log-delete-button' onClick={handleDelete} id={log[0]}>Delete</button>
                                 <Link to={`/spending/log/update/${log[0]}`}><button className='log-update-button'>Update</button></Link>
+                                </td>
                             </tr>
                         )
                     })}

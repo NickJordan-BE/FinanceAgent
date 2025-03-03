@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../context/firebase"
 import { Link, useNavigate } from 'react-router-dom';
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import { axiosCall } from "../../apis/Axios"
 
 import "./index.css";
 
@@ -13,7 +13,6 @@ const RegisterForm = () => {
     const [pass, setPass] = useState("");
     const [passConf, setPassconf] = useState("");
     const nav = useNavigate();
-    const axiosPrivate = useAxiosPrivate();
 
 
     const handleSubmit = async (e) => {
@@ -29,7 +28,7 @@ const RegisterForm = () => {
 
             const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
 
-            const userRef = await axiosPrivate.post("/api/users/create", {
+            const userRef = await axiosCall.post("/api/users/create", {
                 email,
                 uid: userCredential.user.uid
             })

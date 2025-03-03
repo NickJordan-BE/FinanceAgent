@@ -61,6 +61,10 @@
   background-color: #282828;
 }
 
+.input:not(:focus) {
+  color: white;
+}
+
 .input:focus {
   outline: none;
   color: white;
@@ -80,7 +84,7 @@
 
 .flex-row > div > label {
   font-size: 14px;
-  color: black;
+  color: white;
   font-weight: 400;
 }
 

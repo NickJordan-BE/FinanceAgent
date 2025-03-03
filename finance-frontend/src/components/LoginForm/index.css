@@ -47,11 +47,12 @@
     width: 100%;
     height: 100%;
     background-color: #282828;
+    color: white;
   }
 
   .check-label {
     color: white;
-    margin-left: 5px;
+    margin-right: 60%;
   }
   
   
@@ -59,9 +60,14 @@
     outline: none;
     color: white;
   }
+
+  .input:not(:focus) {
+    color: white;
+  }
   
   .inputForm:focus-within {
     border: 1.5px solid white;
+    color: white;
   }
   
   .flex-row {
@@ -74,7 +80,7 @@
   
   .flex-row > div > label {
     font-size: 14px;
-    color: black;
+    color: white;
     font-weight: 400;
   }
   
